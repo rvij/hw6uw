@@ -382,6 +382,7 @@ question6 &lt;- function() {
 <ul>
 <li>lm assumptions violations may be overcome by transforming variables </li>
 <li>Also designing an experiment and controlling some variability may provide better results.</li>
+<li>Look for other variables that can explain the unexplained variation in data</li>
 </ul>
 
 <pre><code class="r">question3()
@@ -507,18 +508,18 @@ question6 &lt;- function() {
 ## Multiple R-squared:  0.459,  Adjusted R-squared:  0.454 
 ## F-statistic:  110 on 4 and 520 DF,  p-value: &lt;2e-16
 ## 
-##                  est       se      t     df  Pr(&gt;|t|)    lo 95    hi 95
-## (Intercept) -1.45873 0.774969 -1.882  25.15 7.142e-02 -3.05434  0.13688
-## smoke2      -0.34941 0.062167 -5.621 116.85 1.315e-07 -0.47253 -0.22629
-## height       0.08289 0.010313  8.037  21.83 5.782e-08  0.06149  0.10428
-## age         -0.02432 0.003796 -6.407 281.66 6.199e-10 -0.03179 -0.01685
-## male2        0.22841 0.063747  3.583 122.56 4.883e-04  0.10222  0.35459
+##                  est       se      t    df  Pr(&gt;|t|)    lo 95    hi 95
+## (Intercept) -1.03363 0.638402 -1.619 339.8 1.064e-01 -2.28934  0.22209
+## smoke2      -0.35519 0.059378 -5.982 432.8 4.628e-09 -0.47189 -0.23848
+## height       0.07642 0.008375  9.124 248.8 0.000e+00  0.05992  0.09291
+## age         -0.02460 0.003760 -6.542 524.5 1.444e-10 -0.03199 -0.01721
+## male2        0.25738 0.063649  4.044 172.3 7.925e-05  0.13174  0.38301
 ##             nmis     fmi  lambda
-## (Intercept)   NA 0.43096 0.38743
-## smoke2        NA 0.18017 0.16626
-## height       200 0.46385 0.41688
-## age            0 0.09673 0.09034
-## male2         NA 0.17486 0.16150
+## (Intercept)   NA 0.08169 0.07630
+## smoke2        NA 0.06269 0.05837
+## height       200 0.10701 0.09986
+## age            0 0.04701 0.04339
+## male2         NA 0.13994 0.13001
 </code></pre>
 
 <h2>Estimate the effect size for a given power of a test</h2>

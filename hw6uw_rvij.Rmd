@@ -111,6 +111,7 @@ question2()
 ## Resolving lm residual assumption violations
 * lm assumptions violations may be overcome by transforming variables 
 * Also designing an experiment and controlling some variability may provide better results.
+* Look for other variables that can explain the unexplained variation in data
 
 ```{r }
 question3()
