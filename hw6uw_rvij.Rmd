@@ -1,0 +1,117 @@
+Homework # 6 UW Data Science course by rvij@cisco.com
+========================================================
+
+# Define functions used in the homework 
+
+```{r}
+setwd("/Users/rajeevvij/Documents/DOcRep/~DataScienceCisco/Module2")
+
+# Reading data from the given files into R
+readFromFiles <- function() {
+  print("Read data files and print summaries")
+  adultfev <<- read.csv("/Users/rajeevvij/Documents/DOcRep/~DataScienceCisco/Module2/adultfev.csv", header=T, sep=",", colClasses = c("character","integer","numeric", "numeric", "factor","factor"))
+  adultfevmiss <<- read.csv("/Users/rajeevvij/Documents/DOcRep/~DataScienceCisco/Module2/adultfevmiss.csv", header=T, sep=",", colClasses = c("character","integer","numeric", "numeric", "factor","factor"))
+  print(summary(adultfev))
+  print(summary(adultfevmiss))
+}
+
+# Estimate the adjusted effect of smoking on fev. 
+# The assumptions of linear regression that we covered in class were linearity, 
+# normality of residuals, homoskedasticity of residuals, and independence of residuals.  
+# Using qqplots, and boxplots of the residuals, assess these assumptions for the proposed analysis. 
+# (note, one of the assumptions does not apply for a binary explanatory variable).
+
+
+question1 <- function(){
+  print("Perform lm and plot dignistic charts for the residuals against different variables")
+  lm1 <<- lm(fev ~ smoke+height+age+male, data=adultfev)
+  summarylm1 <<- summary(lm1)
+  anovalm1 <<- anova(lm1)
+  par(mfrow = c(2,2))
+  plot(lm1)
+  par(mfrow = c(2,2))
+  qqplot(adultfev$smoke, lm1$resid)
+  qqplot(adultfev$male, lm1$resid)
+  qqplot(adultfev$age, lm1$resid)
+  qqplot(adultfev$height, lm1$resid)
+}
+
+
+question2 <- function(){
+  print("Print summary of the lm and provide details of the p-value and slopes")
+  print(summarylm1)
+  print(anovalm1)
+}
+
+question3 <- function(){
+  print("How to address violations of the assumptions in lm")
+  print("Use transformation of variables to address linearity and homoskedasticity of residuals")
+  print("===========")
+}
+
+question4 <- function(){
+  print("Perform lm with missing data anf complete cases")
+  adultfevmissing_cc <- adultfevmiss[complete.cases(adultfevmiss),]
+  lm1cc <<- lm(fev ~ smoke+height+age+male, data=adultfevmissing_cc)
+  summarylm1cc <- summary(lm1cc)
+  anovalm1cc <- anova(lm1cc)
+  print(summarylm1cc)
+  print(anovalm1cc)
+}
+
+question5 <- function(){
+  print("Impute missing data using mice package and compare with complete lm")
+  require(mice)
+  adultfevmiss.imputed <- mice(adultfevmiss)
+  
+  summarylmcc <- summary(lm(fev ~ smoke+height+age+male, data=adultfevmiss))
+  
+  impute.fit <- with(adultfevmiss.imputed, lm(fev ~ smoke+height+age+male))
+  print(summarylmcc)
+  print(summary(pool(impute.fit)))
+}
+
+question6 <- function(){
+  print("Calculate the power of a test")
+  power08 <- power.t.test(n=300, power=0.8, sd=75)
+  power09 <- power.t.test(n=300, power=0.9, sd=75)
+  print(power08)
+  print(power09)
+}
+```
+
+# Call functions used in the homework for different questions
+
+## Read data files and print summaries
+
+```{r }
+readFromFiles()
+```
+
+## Perform lm and plot digonistic plots 
+```{r }
+question1()
+```
+## Print summary of the lm and provide details of the p-value and slopes
+```{r }
+question2()
+```
+
+## Resolving lm residual assumption violations
+```{r }
+question3()
+```
+
+## Perform lm with missing data on complete cases 
+```{r }
+question4()
+```
+## Impute missing values using mice package and perform lm with new imputed values and compare with complete
+```{r }
+question5()
+```
+## Estimate the effect size for a given power of a test
+```{r }
+question6()
+```
+
