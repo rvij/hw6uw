@@ -47,6 +47,7 @@ question2 <- function() {
     print("Print summary of the lm and provide details of the p-value and slopes")
     print(summarylm1)
     print(anovalm1)
+    print(confint(lm1))
 }
 
 question3 <- function() {
@@ -91,6 +92,11 @@ question6 <- function() {
 # Call functions used in the homework for different questions
 
 ## Read data files and print summaries
+
+* Fitting fev against 4 variables smoke, age, height, male to see the adjustments in the smoke variable
+* Ploting the diagnistic graphs, 
+** graphs shows that condition of homoskedasticity is violated and also the residual is normally distributed
+** Ploting residuals against 4 predictor variables shows residual is not evenly distributed around 0 for smoke and age
 
 
 ```r
@@ -144,7 +150,12 @@ question1()
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-31.png) ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-32.png) 
 
+
 ## Print summary of the lm and provide details of the p-value and slopes
+* Printing the p-value and coeffcient for the variables from summary(lm1) and anova(lm1)
+* Results shows that model is able to explain around 40% of variation in data 
+* We can also get confidence intervals for the variables 
+* All the p-values are significant
 
 ```r
 question2()
@@ -185,10 +196,19 @@ question2()
 ## Residuals 720  203.7     0.3                    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+##                2.5 %   97.5 %
+## (Intercept) -1.89624  0.53017
+## smoke1      -0.47002 -0.23944
+## height       0.05591  0.08729
+## age         -0.03243 -0.01786
+## male1        0.15553  0.39352
 ```
 
 
 ## Resolving lm residual assumption violations
+* lm assumptions violations may be overcome by transforming variables 
+* Also designing an experiment and controlling some variability may provide better results.
+
 
 ```r
 question3()
@@ -202,6 +222,9 @@ question3()
 
 
 ## Perform lm with missing data on complete cases 
+* Fitting lm with missing data, using only complete cases
+* Results shows that value of smoke coeffcient has changed to -0.47001592 from earlier -0.35
+
 
 ```r
 question4()
@@ -245,6 +268,10 @@ question4()
 ```
 
 ## Impute missing values using mice package and perform lm with new imputed values and compare with complete
+* Imputing missing values using mice package and refitting lm
+* Comparing lm results with missing data and imputed data
+* Imputed values may have bias towards values being estimated to an average value
+
 
 ```r
 question5()
@@ -311,21 +338,23 @@ question5()
 ## Multiple R-squared:  0.459,	Adjusted R-squared:  0.454 
 ## F-statistic:  110 on 4 and 520 DF,  p-value: <2e-16
 ## 
-##                  est       se      t    df  Pr(>|t|)    lo 95    hi 95
-## (Intercept) -1.53779 0.607825 -2.530 370.7 1.182e-02 -2.73300 -0.34257
-## smoke2      -0.34590 0.059801 -5.784 210.5 2.610e-08 -0.46379 -0.22802
-## height       0.08505 0.008225 10.341 159.0 0.000e+00  0.06881  0.10130
-## age         -0.02508 0.003621 -6.925 638.1 1.066e-11 -0.03219 -0.01797
-## male2        0.21938 0.059036  3.716 362.6 2.343e-04  0.10329  0.33548
+##                  est       se      t     df  Pr(>|t|)    lo 95    hi 95
+## (Intercept) -1.45873 0.774969 -1.882  25.15 7.142e-02 -3.05434  0.13688
+## smoke2      -0.34941 0.062167 -5.621 116.85 1.315e-07 -0.47253 -0.22629
+## height       0.08289 0.010313  8.037  21.83 5.782e-08  0.06149  0.10428
+## age         -0.02432 0.003796 -6.407 281.66 6.199e-10 -0.03179 -0.01685
+## male2        0.22841 0.063747  3.583 122.56 4.883e-04  0.10222  0.35459
 ##             nmis     fmi  lambda
-## (Intercept)   NA 0.07485 0.06987
-## smoke2        NA 0.12146 0.11315
-## height       200 0.14772 0.13707
-## age            0 0.02818 0.02514
-## male2         NA 0.07660 0.07152
+## (Intercept)   NA 0.43096 0.38743
+## smoke2        NA 0.18017 0.16626
+## height       200 0.46385 0.41688
+## age            0 0.09673 0.09034
+## male2         NA 0.17486 0.16150
 ```
 
 ## Estimate the effect size for a given power of a test
+
+* computing power for 0.8 the effect size is ~ 17 and for power of 0.9 the effect size ~ 20
 
 ```r
 question6()

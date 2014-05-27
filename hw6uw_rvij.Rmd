@@ -41,6 +41,7 @@ question2 <- function(){
   print("Print summary of the lm and provide details of the p-value and slopes")
   print(summarylm1)
   print(anovalm1)
+  print(confint(lm1))
 }
 
 question3 <- function(){
@@ -84,6 +85,11 @@ question6 <- function(){
 
 ## Read data files and print summaries
 
+* Fitting fev against 4 variables smoke, age, height, male to see the adjustments in the smoke variable
+* Ploting the diagnistic graphs, 
+** graphs shows that condition of homoskedasticity is violated and also the residual is normally distributed
+** Ploting residuals against 4 predictor variables shows residual is not evenly distributed around 0 for smoke and age
+
 ```{r }
 readFromFiles()
 ```
@@ -92,25 +98,42 @@ readFromFiles()
 ```{r }
 question1()
 ```
+
 ## Print summary of the lm and provide details of the p-value and slopes
+* Printing the p-value and coeffcient for the variables from summary(lm1) and anova(lm1)
+* Results shows that model is able to explain around 40% of variation in data 
+* We can also get confidence intervals for the variables 
+* All the p-values are significant
 ```{r }
 question2()
 ```
 
 ## Resolving lm residual assumption violations
+* lm assumptions violations may be overcome by transforming variables 
+* Also designing an experiment and controlling some variability may provide better results.
+
 ```{r }
 question3()
 ```
 
 ## Perform lm with missing data on complete cases 
+* Fitting lm with missing data, using only complete cases
+* Results shows that value of smoke coeffcient has changed to -0.47001592 from earlier -0.35
+
 ```{r }
 question4()
 ```
 ## Impute missing values using mice package and perform lm with new imputed values and compare with complete
+* Imputing missing values using mice package and refitting lm
+* Comparing lm results with missing data and imputed data
+* Imputed values may have bias towards values being estimated to an average value
+
 ```{r }
 question5()
 ```
 ## Estimate the effect size for a given power of a test
+
+* computing power for 0.8 the effect size is ~ 17 and for power of 0.9 the effect size ~ 20
 ```{r }
 question6()
 ```
